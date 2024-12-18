@@ -1,2 +1,2 @@
 # MoneyMap
-O sistema ajuda usuários a gerenciar suas finanças pessoais
+O sistema que ajuda o usuários a gerenciar suas finanças pessoais.
