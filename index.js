@@ -40,6 +40,22 @@ app.get("/", async (req, res) =>{
     })
 })
 
+app.post("/add", async (req, res) =>{
+    const tipo = req.body.newTipo
+    const descricao = req.body.newDescricao
+    const valor = req.body.newValor
+    const categoria = req.body.newCategoria
+    const data = req.body.newData
+
+    console.log(tipo, descricao, valor, categoria)
+
+    await db.query(
+        "INSERT INTO transacao (tipo, descricao, valor, categoria, data) VALUES ($1, $2, $3, $4, $5);",
+        [tipo, descricao, valor, categoria, data]
+    )
+    res.redirect("/")
+})
+
 app.listen(port, () =>{
     console.log(`Server running http://localhost:${port}`)
 })

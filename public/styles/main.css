@@ -152,4 +152,6 @@ table {
   .add-new-td{
     align-items: center;
     display: flex;
+    border: 1px solid rgb(160 160 160);
+    padding: 8px 10px;
   }
