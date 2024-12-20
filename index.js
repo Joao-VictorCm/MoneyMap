@@ -18,20 +18,26 @@ app.use(express.static("public", {
 const db = new pg.Client({
     user: "postgres",
     host: "localhost",
-    database: "transacao",
+    database: "RMF",
     password: "12345",
     port: "5432"
   
 })
 
-db.connect
+db.connect()
 
-let transacoes = []
+let items = []
 
 app.get("/", async (req, res) =>{
     const result = await db.query(
         "SELECT * FROM transacao"
     )
+    items = result.rows
+    console.log(items)
+    res.render("index.ejs", {
+        listTitle: "MoneyMap",
+        listItems: items
+    })
 })
 
 app.listen(port, () =>{
