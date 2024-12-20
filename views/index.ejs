@@ -1,48 +1,76 @@
 <%- include('partials/header.ejs'); -%>
-<div class="box" id="heading">
-  <h1>
-    <%= listTitle %>
-  </h1>
-</div>
-<div class="box">
-  <% for(let item of listItems){%>
-    <div class="item">
-      <form action="/delete" method="post">
-        <input type="checkbox" onchange="this.form.submit()" name="deleteItemId" value="<%= item.id %>">
-      </form>
 
-      <div id="title<%=item.id%>">
-        <p><%= item.tipo %></p>
-        <p><%= item.descricao %></p>
-        <p><%= item.valor %></p>
-        <p><%= item.categoria %></p>
-        <p><%= item.data %></p>
+  <div class="box" id="heading">
+    <h1>
+      <%= listTitle %>
+    </h1>
+  </div>
+  <div class="box">
+    <% for(let item of listItems){%>
+      <div class="item">
+        <form action="/delete" method="post">
+          <input type="checkbox" onchange="this.form.submit()" name="deleteItemId" value="<%= item.id %>">
+        </form>
+
+        <table id="title<%=item.id%>">
+          <caption>
+            text exmplo 
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Tipo</th>
+              <th scope="col">Descrição</th>
+              <th scope="col">Valor</th>
+              <th scope="col">Categoria</th>
+              <th scope="col">Data</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row"><%= item.id %></th>
+              <td><%= item.tipo %></td>
+              <td><%= item.descricao %></td>
+              <td>R$<%= item.valor %></td>
+              <td><%= item.categoria %></td>
+              <td><%= item.data %></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <form class="edit" action="/edit" method="post">
+          <input type="hidden" name="updatedItemId" value="<%= item.id %>">
+          <input id="input<%=item.id%>" type="text" name="updatedItemTitle" value="<%= item.title %>" autocomplete="off"
+            autofocus="true" hidden="true" />
+          <button id="done<%=item.id%>" class="edit" type="submit" hidden><img class="icon">
+            ✅</button>
+        </form>
+        <button id="edit<%=item.id%>" class="edit" onclick="handler('<%=item.id%>')"><img class="icon">✒️</button>
       </div>
-      
+      <% } %>
 
-      <form class="edit" action="/edit" method="post">
-        <input type="hidden" name="updatedItemId" value="<%= item.id %>">
-        <input id="input<%=item.id%>" type="text" name="updatedItemTitle" value="<%= item.title %>" autocomplete="off"
-          autofocus="true" hidden="true" />
-        <button id="done<%=item.id%>" class="edit" type="submit" hidden><img class="icon">
-          ✅</button>
-      </form>
-      <button id="edit<%=item.id%>" class="edit" onclick="handler('<%=item.id%>')"><img class="icon">✒️</button>
-    </div>
-    <% } %>
+        <form class="" action="/add" method="post">
+          <table>
+            <tbody>
+              <td class="add-new-td">
+                <input type="text" name="newItem" placeholder="Tipo" autocomplete="off" autofocus="true" />
+                <input type="text" name="newItem" placeholder="Descrição" autocomplete="off" autofocus="true" />
+                <input type="text" name="newItem" placeholder="Valor R$" autocomplete="off" autofocus="true" />
+                <input type="text" name="newItem" placeholder="Categoria" autocomplete="off" autofocus="true" />
+                <input type="text" name="newItem" placeholder="Data" autocomplete="off" autofocus="true" />
+                <button class="add" type="submit" name="list" value=<%=listTitle %> >+</button>
+              </td>
+            </tbody>
+          </table>
+        </form>
+  </div>
 
-      <form class="item" action="/add" method="post">
-        <input type="text" name="newItem" placeholder="New Item" autocomplete="off" autofocus="true" />
-        <button class="add" type="submit" name="list" value=<%=listTitle %> >+</button>
-      </form>
-</div>
-
-<script>
-  function handler(id) {
-    document.getElementById("title" + id).setAttribute("hidden", true)
-    document.getElementById("edit" + id).setAttribute("hidden", true)
-    document.getElementById("done" + id).removeAttribute("hidden")
-    document.getElementById("input" + id).removeAttribute("hidden")
-  }
-</script>
+  <script>
+    function handler(id) {
+      document.getElementById("title" + id).setAttribute("hidden", true)
+      document.getElementById("edit" + id).setAttribute("hidden", true)
+      document.getElementById("done" + id).removeAttribute("hidden")
+      document.getElementById("input" + id).removeAttribute("hidden")
+    }
+  </script>
   <%- include('partials/footer.ejs'); -%>
