@@ -38,14 +38,29 @@
           </tbody>
         </table>
 
-        <form class="edit" action="/edit" method="post">
-          <input type="hidden" name="updatedItemId" value="<%= item.id %>">
-          <input id="input<%=item.id%>" type="text" name="updatedItemTitle" value="<%= item.title %>" autocomplete="off"
-            autofocus="true" hidden="true" />
-          <button id="done<%=item.id%>" class="edit" type="submit" hidden><img class="icon">
-            ✅</button>
-        </form>
-        <button id="edit<%=item.id%>" class="edit" onclick="handler('<%=item.id%>')"><img class="icon">✒️</button>
+       <table>
+        <tbody>
+          <td>
+            <form class="edit" action="/edit" method="post">
+              <input type="hidden" name="updatedItemId" value="<%= item.id %>">
+              <input id="input<%=item.id%>" type="text" name="updatedItemTitle" value="<%= item.tipo %>" autocomplete="off"
+                autofocus="true" hidden="true" />
+                <input id="descricao<%=item.id%>" type="text" name="updatedDescricao" value="<%= item.descricao %>" autocomplete="off"
+                autofocus="true" hidden="true" />
+                <input id="valor<%=item.id%>" type="text" name="updatedItemValor" value="<%= item.valor %>" autocomplete="off"
+                autofocus="true" hidden="true" />
+                <input id="categoria<%=item.id%>" type="text" name="updatedCategoria" value="<%= item.categoria %>" autocomplete="off"
+                autofocus="true" hidden="true" />
+                <input id="data<%=item.id%>" type="text" name="updatedData" value="<%= item.data %>" autocomplete="off"
+                autofocus="true" hidden="true" />
+                
+              <button id="done<%=item.id%>" class="edit" type="submit" hidden><img class="icon">
+                ✅</button>
+            </form>
+            <button id="edit<%=item.id%>" class="edit" onclick="handler('<%=item.id%>')"><img class="icon">✒️</button>
+          </td>
+        </tbody>
+       </table>
       </div>
       <% } %>
 
@@ -63,6 +78,8 @@
             </tbody>
           </table>
         </form>
+
+
   </div>
 
   <script>
@@ -71,6 +88,10 @@
       document.getElementById("edit" + id).setAttribute("hidden", true)
       document.getElementById("done" + id).removeAttribute("hidden")
       document.getElementById("input" + id).removeAttribute("hidden")
+      document.getElementById("descricao" + id).removeAttribute("hidden")
+      document.getElementById("valor" + id).removeAttribute("hidden")
+      document.getElementById("categoria" + id).removeAttribute("hidden")
+      document.getElementById("data" + id).removeAttribute("hidden")
     }
   </script>
   <%- include('partials/footer.ejs'); -%>

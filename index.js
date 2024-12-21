@@ -56,6 +56,19 @@ app.post("/add", async (req, res) =>{
     res.redirect("/")
 })
 
+app.post("/edit", (req, res) =>{
+    const id = req.body.updatedItemId
+    const tipo = req.body.updatedItemTitle
+    const descricao = req.body.updatedDescricao
+    const valor = req.body.updatedItemValor
+    const categoria = req.body.updatedCategoria
+    const data = req.body.updatedData
+
+    console.log(id, tipo, descricao, valor, categoria, data)
+
+   
+})
+
 app.listen(port, () =>{
     console.log(`Server running http://localhost:${port}`)
 })
